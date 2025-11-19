@@ -11,11 +11,10 @@ cargo add ezcfg
 The types you use must implement `FromStr` and `Display`.
 ```rust
 use ezcfg::*;
-use semver::Version;
 
 cfg!{
     MyConfig ["~/.path/to.cfg"]
-        version: Version,
+        version: semver::Version,
         description: String,
         some_value: u8
 }
@@ -23,7 +22,7 @@ cfg!{
 3. The struct created by the macro is public within your crate.
 ```rust
 let my_config = MyConfig {
-    version: Version::new(0, 0, 1),
+    version: semver::Version::new(0, 0, 1),
     description: String::from("This is an example config file."),
     some_value: 69u8,
 };
