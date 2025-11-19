@@ -2,7 +2,7 @@
 /// Define field names and types for configurable variables.
 /// ```
 /// ezcfg::cfg!{ 
-///     TestConfig ["/test/path.cfg"] 
+///     TestConfig ["~/test/path.cfg"] 
 ///         field1: String,
 ///         field2: u32
 /// }
@@ -13,6 +13,7 @@
 /// };
 ///
 /// assert_eq!(test.field1(), &String::new());
+/// assert_eq!(test.field2(), &0u32);
 /// ```
 #[macro_export]
 macro_rules! cfg {

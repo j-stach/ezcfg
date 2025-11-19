@@ -1,6 +1,11 @@
+
 [package]
 name = "ezcfg"
+authors = ["j-stach"]
+description = "A simple library for simple configuration."
+repository = "https://github.com/j-stach/ezcfg"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+readme = "README.md"
 
-[dependencies]

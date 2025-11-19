@@ -22,7 +22,7 @@ cfg!{
 ```
 3. The struct created by the macro is public within your crate:
 ```rust
-let default = MyConfig {
+let my_config = MyConfig {
     version: Version::new(0, 0, 1),
     description: String::from("This is an example config file."),
     some_value: 69u8,
@@ -30,7 +30,7 @@ let default = MyConfig {
 ```
 4. Because we enforce a static path, writing to file is very clean:
 ```rust
-default.write().unwrap();
+my_config.write().unwrap();
 ```
 The file at `~/.path/to.cfg` will look like this:
 ```
@@ -55,13 +55,13 @@ description=This is an example config file.
 some_value=42
 ```
 7. In addition, the path to the configuration file is easily accessible:
-```
+```rust
 let path = MyConfig::PATH;
 assert_eq!(path, "~/.path/to.cfg");
 ```
 
 ### Troubleshooting
-Please note that the `cfg` macro expects a single `ident` token for each type when defining fields.
+Please note that the `cfg` macro expects a single `ident` token for each type when defining fields. <br>
 To use generic types and full module paths as field types, first set up an alias that describes the desired type in a single identifier token:
 ```rust
 // Will fail to compile:
@@ -78,10 +78,10 @@ cfg!{
         field: TypeT,
 }
 ```
-Also note that each line follows `field=value`, where `value` can be any type that is representable in string form, as long as the formatted string does not contain the characters `\n` or `=`.
+Also note that each line obeys `field=value`, where `value` can be any type that is representable in string form, as long as the formatted string does not contain the characters `\n` or `=`.
 
 ## Development
-This crate is mostly complete, and designed to be lightweight and minimal.
+This crate is mostly complete, and designed to be lightweight and minimal. <br>
 New features (e.g., provided methods for `Config`) may be added later if their absence is salient.
 
 If you encounter any bugs, please leave an issue!
