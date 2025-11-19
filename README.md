@@ -20,7 +20,7 @@ cfg!{
         some_value: u8
 }
 ```
-3. The struct created by the macro is public within your crate:
+3. The struct created by the macro is public within your crate.
 ```rust
 let my_config = MyConfig {
     version: Version::new(0, 0, 1),
@@ -28,7 +28,7 @@ let my_config = MyConfig {
     some_value: 69u8,
 };
 ```
-4. Because we enforce a static path, writing to file is very clean:
+4. Because we enforce a static path, writing to file is very clean.
 ```rust
 my_config.write().unwrap();
 ```
@@ -38,12 +38,12 @@ version=0.0.1
 description=This is an example config file.
 some_value=69
 ```
-5. Reading from file into a struct is similarly tidy:
+5. Reading from file into a struct is similarly tidy.
 ```rust
 let mut my_config = MyConfig::read().unwrap();
 assert_eq!(my_config.some_value, 69u8);
 ```
-6. As is updating and overwriting values:
+6. As is updating and overwriting values.
 ```rust
 my_config.some_value = 42u8;
 my_config.write().unwrap();
@@ -54,7 +54,7 @@ version=0.0.1
 description=This is an example config file.
 some_value=42
 ```
-7. In addition, the path to the configuration file is easily accessible:
+7. In addition, the path to the configuration file is easily accessible.
 ```rust
 let path = MyConfig::PATH;
 assert_eq!(path, "~/.path/to.cfg");
