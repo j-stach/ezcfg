@@ -23,7 +23,7 @@ cfg!{
 ```rust
 let my_config = MyConfig {
     version: semver::Version::new(0, 0, 1),
-    description: String::from("This is an example config file."),
+    description: String::from("This is my configuration."),
     some_value: 69u8,
 };
 ```
@@ -34,7 +34,7 @@ my_config.write().unwrap();
 The file at `~/.path/to.cfg` will look like this:
 ```
 version=0.0.1
-description=This is an example config file.
+description=This is my configuration.
 some_value=69
 ```
 5. Reading from file into a struct is similarly tidy.
@@ -50,7 +50,7 @@ my_config.write().unwrap();
 The file will be changed:
 ```
 version=0.0.1
-description=This is an example config file.
+description=This is my configuration.
 some_value=42
 ```
 7. In addition, the path to the configuration file is easily accessible.
