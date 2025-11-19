@@ -7,7 +7,7 @@ A simple library for simple configuration.
 ```
 cargo add ezcfg
 ```
-2. Use the `cfg` macro to define a struct with your configurable values. 
+2. Use the `cfg` macro to define a struct with your configurable values. <br> 
 The types you use must implement `FromStr` and `Display`.
 ```rust
 use ezcfg::*;
