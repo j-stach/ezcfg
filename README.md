@@ -23,7 +23,7 @@ cfg!{
 ```rust
 let my_config = MyConfig {
     version: semver::Version::new(0, 0, 1),
-    description: String::from("This is my configuration."),
+    description: String::from("This is my configuration"),
     some_value: 69u8,
 };
 ```
@@ -34,7 +34,7 @@ my_config.write().unwrap();
 The file at `~/.path/to.cfg` will look like this:
 ```
 version=0.0.1
-description=This is my configuration.
+description=This is my configuration
 some_value=69
 ```
 5. Reading from file into a struct is similarly tidy.
@@ -44,13 +44,14 @@ assert_eq!(my_config.some_value, 69u8);
 ```
 6. As is updating and overwriting values.
 ```rust
+my_config.version = semver::Version::new(0, 0, 2);
 my_config.some_value = 42u8;
 my_config.write().unwrap();
 ```
 The file will be changed:
 ```
-version=0.0.1
-description=This is my configuration.
+version=0.0.2
+description=This is my configuration
 some_value=42
 ```
 7. In addition, the path to the configuration file is easily accessible.
