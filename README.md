@@ -7,19 +7,19 @@ A simple library for simple configuration.
 ```
 cargo add ezcfg
 ```
-2. Use the `cfg` macro to define a struct with your configurable values. <br> 
+2. Use the `crate_cfg` or `pub_cfg` macro to define a struct with your configurable values. <br> 
 The types you use must implement `FromStr` and `Display`.
 ```rust
-use ezcfg::*;
+use ezcfg::{ crate_cfg, Config };
 
-cfg!{
+crate_cfg!{
     MyConfig ["~/.path/to.cfg"]
         version: semver::Version,
         description: String,
         some_value: u8
 }
 ```
-3. The struct created by the macro is public within your crate.
+3. The struct created by the `crate_cfg` macro is public within your crate, while the struct created by `pub_cfg` is exportable.
 ```rust
 let my_config = MyConfig {
     version: semver::Version::new(0, 0, 1),
@@ -61,11 +61,11 @@ assert_eq!(path, "~/.path/to.cfg");
 ```
 
 ### Troubleshooting
-Please note that the `cfg` macro expects a single `ident` token for each type when defining fields. <br>
+Please note that the macros expect a single `ident` token for each type when defining fields. <br>
 To use generic types and full module paths as field types, first set up an alias that describes the desired type in a single identifier token:
 ```rust
 // Will fail to compile:
-cfg!{
+crate_cfg!{
     BadConfig ["~/.badcfg"]
         field: Type<T>,
 }
@@ -73,7 +73,7 @@ cfg!{
 // Do this:
 type TypeT = Type<T>;
 
-cfg!{
+crate_cfg!{
     OkConfig ["~/.okcfg"]
         field: TypeT,
 }
@@ -81,6 +81,8 @@ cfg!{
 Also note that each line obeys `field=value`, where `value` can be any type that is representable in string form, as long as the formatted string does not contain the characters `\n` or `=`.
 
 ## Development
+- In `0.1.1`, there are different macros for public and private configuration structs.
+
 This crate is mostly complete, and designed to be lightweight and minimal. <br>
 New features (e.g., provided methods for `Config`) may be added later if their absence is salient.
 
