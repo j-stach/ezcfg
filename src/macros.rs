@@ -38,14 +38,18 @@ macro_rules! crate_cfg {
                 let file = std::fs::read_to_string(Self::PATH)?;
                 let lines: Vec<&str> = file.split('\n').collect();
 
+                // If lines.len() = 0;
+
                 let mut fields = Vec::with_capacity(lines.len());
 
                 for line in lines {
-                    let fv: Vec<&str> = line.split('=').collect();
-                    if fv.len() != 2 {
-                        return Err($crate::Error::Format(line.to_owned()))
+                    if !line.is_empty() {
+                        let fv: Vec<&str> = line.split('=').collect();
+                        if fv.len() != 2 {
+                            return Err($crate::Error::Format(line.to_owned()))
+                        }
+                        fields.push((fv[0].to_owned(), fv[1].to_owned()))
                     }
-                    fields.push((fv[0].to_owned(), fv[1].to_owned()))
                 }
 
                 Ok(Self {
@@ -109,7 +113,7 @@ macro_rules! pub_cfg {
     ($name:ident [$path:expr] $($field:ident: $typ:ident),* $(,)?) => {
 
         pub struct $name {
-            $(pub(crate) $field: $typ,)*
+            $(pub $field: $typ,)*
         }
 
         impl $name {
@@ -129,11 +133,13 @@ macro_rules! pub_cfg {
                 let mut fields = Vec::with_capacity(lines.len());
 
                 for line in lines {
-                    let fv: Vec<&str> = line.split('=').collect();
-                    if fv.len() != 2 {
-                        return Err($crate::Error::Format(line.to_owned()))
+                    if !line.is_empty() {
+                        let fv: Vec<&str> = line.split('=').collect();
+                        if fv.len() != 2 {
+                            return Err($crate::Error::Format(line.to_owned()))
+                        }
+                        fields.push((fv[0].to_owned(), fv[1].to_owned()))
                     }
-                    fields.push((fv[0].to_owned(), fv[1].to_owned()))
                 }
 
                 Ok(Self {

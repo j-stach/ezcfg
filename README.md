@@ -82,6 +82,7 @@ Also note that each line obeys `field=value`, where `value` can be any type that
 
 ## Development
 - In `0.1.1`, there are different macros for public and private configuration structs.
+- In `0.0.2`, the empty line bug is fixed.
 
 This crate is mostly complete, and designed to be lightweight and minimal. <br>
 New features (e.g., provided methods for `Config`) may be added later if their absence is salient.
